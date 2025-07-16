@@ -694,5 +694,8 @@ app.get('/not-an-admin-login', (req, res) => {
 // Start server
 const PORT = 4000;
 app.listen(PORT, () => {
-  console.log(`FitPickd server running on http://localhost:${PORT}`);
+  const baseUrl = process.env.NODE_ENV === 'production'
+    ? 'https://fitpickd-backend.onrender.com'
+    : `http://localhost:${PORT}`;
+  console.log(`FitPickd server running on ${baseUrl}`);
 }); 
