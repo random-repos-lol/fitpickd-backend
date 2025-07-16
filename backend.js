@@ -134,18 +134,18 @@ app.get('/auth/google', passport.authenticate('google', {
 
 app.get('/auth/google/callback', passport.authenticate('google', { 
   session: false, 
-  failureRedirect: '/html/signup.html?error=oauth_failed' 
+  failureRedirect: '/signup.html?error=oauth_failed' 
 }), (req, res) => {
   const email = req.user.email;
   const state = req.query.state;
   const baseUrl = process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : 'http://localhost:4000';
   
   if (state === 'not-an-admin') {
-    res.redirect(`${baseUrl}/html/not-an-admin-login.html?verified_email=${encodeURIComponent(email)}`);
+    res.redirect(`${baseUrl}/not-an-admin-login.html?verified_email=${encodeURIComponent(email)}`);
   } else if (state === 'forgot-password') {
-    res.redirect(`${baseUrl}/html/forgot-password.html?email=${encodeURIComponent(email)}`);
+    res.redirect(`${baseUrl}/forgot-password.html?email=${encodeURIComponent(email)}`);
   } else {
-    res.redirect(`${baseUrl}/html/signup.html?verified_email=${encodeURIComponent(email)}`);
+    res.redirect(`${baseUrl}/signup.html?verified_email=${encodeURIComponent(email)}`);
   }
 });
 
