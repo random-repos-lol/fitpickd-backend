@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - FitPickd</title>
+    <meta name="description" content="Secure admin login for FitPickd">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/admin-login-styles.css">
+</head>
+<body style="background-color: #F5F0E6;" class="font-opensans">
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <!-- Logo and Title -->
+            <div class="text-center">
+                <img src="/images/FitPickd Logo.png" alt="FitPickd Logo" class="mx-auto h-20 w-auto mb-4">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Admin Access</h2>
+                <p class="text-gray-600">Secure authentication required</p>
+            </div>
+            <!-- Login Form -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <form id="admin-login-form" class="space-y-6">
+                    <!-- Username -->
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+                            Username
+                        </label>
+                        <input type="text" id="username" name="username" required
+                               class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none"
+                               placeholder="Enter username">
+                    </div>
+                    <!-- Password -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                            Password
+                        </label>
+                        <input type="password" id="password" name="password" required
+                               class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none"
+                               placeholder="Enter password">
+                    </div>
+                    <!-- Email Verification Status -->
+                    <div id="email-verification-status" class="hidden">
+                        <div class="flex items-center p-3 rounded-md">
+                            <i id="email-status-icon" class="fas fa-info-circle mr-2"></i>
+                            <span id="email-status-text" class="text-sm"></span>
+                        </div>
+                    </div>
+                    <!-- Verify Email Button -->
+                    <div>
+                        <button type="button" id="verify-email-btn"
+                                class="w-full flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                            <i class="fab fa-google mr-2"></i>
+                            Verify Your Email
+                        </button>
+                    </div>
+                    <!-- Sign In Button (initially disabled) -->
+                    <div>
+                        <button type="submit" id="signin-btn"
+                                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-400 btn-disabled transition-colors"
+                                disabled>
+                            Sign In
+                        </button>
+                    </div>
+                </form>
+                <!-- Error Message -->
+                <div id="error-message" class="hidden mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    <span id="error-text"></span>
+                </div>
+                <!-- Success Message -->
+                <div id="success-message" class="hidden mt-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span id="success-text"></span>
+                </div>
+            </div>
+            <!-- Security Notice -->
+            <div class="text-center text-sm text-gray-500">
+                <i class="fas fa-shield-alt mr-1"></i>
+                Secure access only. Unauthorized attempts will be logged.
+            </div>
+        </div>
+    </div>
+    <script src="/not-an-admin-login.js"></script>
+</body>
+</html> 

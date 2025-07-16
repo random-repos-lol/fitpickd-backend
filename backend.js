@@ -674,7 +674,7 @@ app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/html', express.static(path.join(__dirname, 'html')));
-// Serve admin dashboard assets from backend root
+// Serve admin login and dashboard assets from backend root
 app.use(express.static(__dirname));
 
 // Root route
@@ -687,8 +687,9 @@ app.get('/not-an-admin', authenticateAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, 'not-an-admin.html'));
 });
 
+// Updated admin login route to serve from root
 app.get('/not-an-admin-login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', 'not-an-admin-login.html'));
+  res.sendFile(path.join(__dirname, 'not-an-admin-login.html'));
 });
 
 // Start server
