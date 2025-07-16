@@ -1,0 +1,60 @@
+/**
+ * FitPickd Admin Dashboard - Minimal Styles
+ * Only styles needed for the admin dashboard
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+/* Form Styles - Essential for admin forms */
+.form-input {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile dropdown container - Used in admin forms */
+.mobile-dropdown-container {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Navigation styles - Used in admin dashboard */
+.desktop-nav img[alt="FitPickd Logo"],
+.mobile-nav img[alt="FitPickd Logo"] {
+    pointer-events: none;
+    cursor: default;
+}
+
+/* Mobile responsive styles for admin dashboard */
+@media (max-width: 768px) {
+    select {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    /* Ensure dropdown options don't overflow */
+    select option {
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    /* Container constraints for mobile */
+    .mobile-dropdown-container {
+        position: relative;
+        max-width: 100%;
+        overflow: hidden;
+    }
+}
+
+/* Focus styles for accessibility */
+.focus-visible:focus {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+} 

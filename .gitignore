@@ -1,0 +1,15 @@
+# Node modules (dependencies)
+node_modules/
+
+# Environment variables and secrets
+.env
+
+# Local admin setup docs
+ADMIN_SETUP.md
+
+# Uploaded files (if any)
+uploads/
+
+# OS or editor files
+.DS_Store
+Thumbs.db 
