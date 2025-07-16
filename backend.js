@@ -138,13 +138,14 @@ app.get('/auth/google/callback', passport.authenticate('google', {
 }), (req, res) => {
   const email = req.user.email;
   const state = req.query.state;
-  const baseUrl = process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : 'https://fitpickd.vercel.app';
   
   if (state === 'not-an-admin') {
-    res.redirect(`${baseUrl}/not-an-admin-login.html?verified_email=${encodeURIComponent(email)}`);
+    res.redirect(`/not-an-admin-login?verified_email=${encodeURIComponent(email)}`);
   } else if (state === 'forgot-password') {
+    const baseUrl = process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : 'https://fitpickd.vercel.app';
     res.redirect(`${baseUrl}/forgot-password.html?email=${encodeURIComponent(email)}`);
   } else {
+    const baseUrl = process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : 'https://fitpickd.vercel.app';
     res.redirect(`${baseUrl}/signup.html?verified_email=${encodeURIComponent(email)}`);
   }
 });
