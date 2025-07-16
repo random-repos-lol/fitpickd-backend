@@ -75,7 +75,7 @@ app.use(session({
 // Rate limiting for admin routes
 const adminRateLimit = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // limit each IP to 5 requests per windowMs
+  max: 100, // allow up to 100 requests per 15 minutes
   message: 'Too many login attempts, please try again later.',
   standardHeaders: true,
   legacyHeaders: false,
