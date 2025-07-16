@@ -48,8 +48,8 @@ app.use(helmet({
 
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? [process.env.FRONTEND_URL, 'https://your-frontend.vercel.app'] // Add your actual Vercel URL
-    : 'http://localhost:3000',
+    ? [process.env.FRONTEND_URL, 'https://fitpickd.vercel.app'] // Add your actual Vercel URL
+    : 'https://fitpickd.vercel.app',
   credentials: true
 }));
 
@@ -134,11 +134,11 @@ app.get('/auth/google', passport.authenticate('google', {
 
 app.get('/auth/google/callback', passport.authenticate('google', { 
   session: false, 
-  failureRedirect: '/signup.html?error=oauth_failed' 
+  failureRedirect: 'https://fitpickd.vercel.app/signup.html?error=oauth_failed' 
 }), (req, res) => {
   const email = req.user.email;
   const state = req.query.state;
-  const baseUrl = process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : 'http://localhost:4000';
+  const baseUrl = process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : 'https://fitpickd.vercel.app';
   
   if (state === 'not-an-admin') {
     res.redirect(`${baseUrl}/not-an-admin-login.html?verified_email=${encodeURIComponent(email)}`);

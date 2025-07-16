@@ -2,7 +2,7 @@
 
 let currentProducts = [];
 let currentOutOfStockProducts = [];
-const API_BASE = window.API_BASE || 'http://localhost:4000';
+const API_BASE = window.API_BASE || (window.location.hostname === 'localhost' ? 'http://localhost:4000' : 'https://fitpickd-backend.onrender.com');
 
 // Helper function to get authenticated fetch options
 function getAuthHeaders(method = 'GET', body = null) {
