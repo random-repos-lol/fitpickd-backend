@@ -390,13 +390,22 @@ function displayProductsTable() {
                 ${product.outOfStock ? '<span class="ml-2 px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Out of Stock</span>' : ''}
             </td>
             <td class="px-2 py-4 whitespace-nowrap">
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                              ${product.featured ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800'}">
-                    ${product.featured ? 'Featured' : 'Standard'}
-                </span>
+                <div class="flex flex-col space-y-1">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                              ${product.category === 'shirts' ? 'bg-blue-100 text-blue-800' : 
+                                product.category === 'polo-tshirt' ? 'bg-green-100 text-green-800' : 
+                                'bg-purple-100 text-purple-800'}">
+                        ${product.category === 'trousers' ? 'Trousers' : product.category === 'shirts' ? 'Shirt' : product.category === 'polo-tshirt' ? 'Polos' : product.category}
+                    </span>
+                    ${product.featured ? '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Featured</span>' : ''}
+                </div>
             </td>
-            <td class="px-2 py-4 whitespace-nowrap">${product.category}</td>
             <td class="px-2 py-4 whitespace-nowrap">₹${product.price}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex flex-wrap gap-1">
+                    ${product.sizes && product.sizes.length > 0 ? product.sizes.map(size => `<span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">${size}</span>`).join('') : '<span class="text-gray-400 text-xs">No sizes</span>'}
+                </div>
+            </td>
             <td class="px-6 py-4 whitespace-nowrap text-center">
                 <div class="flex flex-col space-y-2">
                     <button class="edit-product-btn text-blue-600 hover:text-blue-900 p-1" data-product-id="${product._id}">
