@@ -97,7 +97,7 @@ function closeAccountsModal() {
 
 async function fetchAndDisplayAccounts() {
     try {
-        const res = await fetch('http://localhost:4000/customers');
+        const res = await fetch(`${API_BASE}/customers`);
         if (!res.ok) throw new Error('Failed to fetch accounts');
         const accounts = await res.json();
         const tableBody = document.getElementById('accounts-table-body');
@@ -122,7 +122,7 @@ async function fetchAndDisplayAccounts() {
 
 async function actuallyDeleteCustomerAccount(customerId) {
     try {
-        const res = await fetch(`http://localhost:4000/customers/${customerId}`, { method: 'DELETE' });
+        const res = await fetch(`${API_BASE}/customers/${customerId}`, { method: 'DELETE' });
         if (!res.ok) throw new Error('Failed to delete account');
         showNotification('Customer account deleted!', 'success');
         fetchAndDisplayAccounts();
