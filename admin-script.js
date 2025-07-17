@@ -135,6 +135,35 @@ function deleteCustomerAccount(customerId) {
     showDeleteAccountConfirmModal(customerId);
 }
 
+// --- Add these handler functions near the top-level (after global variables, before initializeAdmin) ---
+function handleTableActionClick(event) {
+    const productId = event.target.closest('button')?.getAttribute('data-product-id');
+    if (!productId) return;
+    if (event.target.closest('.edit-images-btn')) {
+        openEditImagesModal(productId);
+    } else if (event.target.closest('.edit-product-btn')) {
+        editProduct(productId);
+    } else if (event.target.closest('.delete-product-btn')) {
+        deleteProduct(productId);
+    } else if (event.target.closest('.toggle-featured-btn')) {
+        toggleFeatured(productId);
+    }
+}
+
+function handleMobileCardActionClick(event) {
+    const productId = event.target.closest('button')?.getAttribute('data-product-id');
+    if (!productId) return;
+    if (event.target.closest('.edit-images-btn')) {
+        openEditImagesModal(productId);
+    } else if (event.target.closest('.edit-product-btn')) {
+        editProduct(productId);
+    } else if (event.target.closest('.delete-product-btn')) {
+        deleteProduct(productId);
+    } else if (event.target.closest('.toggle-featured-btn')) {
+        toggleFeatured(productId);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     checkAdminAuth();
     initializeAdmin();
@@ -333,6 +362,11 @@ function initializeAdmin() {
     initializeOutOfStockSearch();
     initializeOutOfStockFilters();
     updateStats();
+    // Attach event listeners ONCE here
+    const tableBody = document.getElementById('products-table-body');
+    const mobileCards = document.getElementById('mobile-products-cards');
+    if (tableBody) tableBody.addEventListener('click', handleTableActionClick);
+    if (mobileCards) mobileCards.addEventListener('click', handleMobileCardActionClick);
 }
 
 // Fetch and display products from backend
@@ -422,65 +456,8 @@ function displayProductsTable() {
         </tr>
     `).join('');
     // Event delegation for desktop table
-    tableBody.removeEventListener('click', handleTableActionClick);
-    tableBody.addEventListener('click', handleTableActionClick);
-    function handleTableActionClick(event) {
-        const productId = event.target.closest('button')?.getAttribute('data-product-id');
-        if (!productId) return;
-        if (event.target.closest('.edit-images-btn')) {
-            openEditImagesModal(productId);
-        } else if (event.target.closest('.edit-product-btn')) {
-            editProduct(productId);
-        } else if (event.target.closest('.delete-product-btn')) {
-            deleteProduct(productId);
-        } else if (event.target.closest('.toggle-featured-btn')) {
-            toggleFeatured(productId);
-        }
-    }
-    // Mobile cards
-    mobileCards.innerHTML = currentProducts.map(product => `
-        <div class="bg-white rounded-lg shadow-md p-4 mb-4" data-product-id="${product._id}">
-            <div class="flex items-center space-x-4 mb-2">
-                ${product.images && product.images.length > 0 && product.images[0].url ? `<img src="${product.images[0].url}" alt="Product Image" class="h-16 w-16 object-cover rounded" />` : ''}
-                <div>
-                    <div class="font-semibold text-lg">${product.name}</div>
-                    <div class="text-gray-500 text-sm">${product.category}</div>
-                    <div class="text-gray-700 text-sm">₹${product.price}</div>
-                    ${product.outOfStock ? '<span class="ml-2 px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Out of Stock</span>' : ''}
-                    </div>
-                </div>
-                <div class="flex flex-row space-x-2 mt-2">
-                <button class="edit-images-btn text-gray-600 hover:text-black p-1" data-product-id="${product._id}">
-                        <i class="fas fa-image"></i>
-                    </button>
-                <button class="edit-product-btn text-blue-600 hover:text-blue-900 p-1" data-product-id="${product._id}">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                <button class="delete-product-btn text-red-600 hover:text-red-900 p-1" data-product-id="${product._id}">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                <button class="toggle-featured-btn ${product.featured ? 'text-yellow-600' : 'text-gray-400'} hover:text-yellow-600 p-1" data-product-id="${product._id}">
-                        <i class="fas fa-star"></i>
-                    </button>
-            </div>
-        </div>
-    `).join('');
-    // Event delegation for mobile cards
-    mobileCards.removeEventListener('click', handleMobileCardActionClick);
-    mobileCards.addEventListener('click', handleMobileCardActionClick);
-    function handleMobileCardActionClick(event) {
-        const productId = event.target.closest('button')?.getAttribute('data-product-id');
-        if (!productId) return;
-        if (event.target.closest('.edit-images-btn')) {
-            openEditImagesModal(productId);
-        } else if (event.target.closest('.edit-product-btn')) {
-            editProduct(productId);
-        } else if (event.target.closest('.delete-product-btn')) {
-            deleteProduct(productId);
-        } else if (event.target.closest('.toggle-featured-btn')) {
-            toggleFeatured(productId);
-        }
-    }
+    // tableBody.removeEventListener('click', handleTableActionClick); // REMOVED
+    // tableBody.addEventListener('click', handleTableActionClick); // REMOVED
 }
 
 // Display out of stock products in table

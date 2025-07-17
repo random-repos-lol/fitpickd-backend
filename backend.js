@@ -30,6 +30,7 @@ cloudinary.config({
 
 // Initialize Express app
 const app = express();
+app.set('trust proxy', 1); // Trust first proxy (needed for correct IP detection behind Render/Vercel/etc)
 const upload = multer({ dest: 'uploads/' });
 
 // Security middleware
